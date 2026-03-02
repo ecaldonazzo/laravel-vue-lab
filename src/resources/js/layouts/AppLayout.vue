@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    
+
     <!-- Sidebar -->
     <aside class="sidebar">
       <div class="sidebar-header">
@@ -29,7 +29,11 @@
             <span class="icon">◈</span> Chat em tempo real
             <span class="nav-badge">NOVO</span>
           </router-link>
+            <router-link class="nav-item" to="/pokemon">
+                <span class="icon">⚔</span> Batalha Pokémon
+            </router-link>
         </div>
+
       </nav>
 
       <div class="sidebar-footer">
@@ -70,9 +74,11 @@ const route = useRoute()
 const isDark = ref(true)
 
 const pageNames = {
-  '/': 'início',
-  '/sobre': 'sobre mim',
-  '/chat': 'chat em tempo real',
+    '/': 'início',
+    '/sobre': 'sobre mim',
+    '/chat': 'chat em tempo real',
+    '/pokemon': 'batalha pokémon',
+
 }
 
 const currentPage = computed(() => pageNames[route.path] || route.path)
@@ -253,10 +259,10 @@ function toggleTheme() {
 
 .btn-primary:hover { opacity: 0.85; color: var(--bg); }
 
-.content { 
-  flex: 1; 
-  overflow-y: auto; 
-  padding: 40px 56px; 
+.content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 40px 56px;
 }
 
 </style>
