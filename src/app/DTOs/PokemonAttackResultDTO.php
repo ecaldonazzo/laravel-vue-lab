@@ -2,7 +2,7 @@
 
 namespace App\DTOs;
 
-class PokemonAttackResultDto
+class PokemonAttackResultDTO
 {
     public function __construct(
         public readonly int  $damage,

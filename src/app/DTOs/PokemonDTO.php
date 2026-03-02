@@ -2,7 +2,7 @@
 
 namespace App\DTOs;
 
-class PokemonDto
+class PokemonDTO
 {
     public function __construct(
         public readonly int    $id,

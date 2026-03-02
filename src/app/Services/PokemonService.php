@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use App\DTOs\PokemonAttackResultDto;
-use App\DTOs\PokemonDto;
+use App\DTOs\PokemonAttackResultDTO;
+use App\DTOs\PokemonDTO;
 use App\Integrations\PokemonClient;
 
 class PokemonService
@@ -12,18 +12,18 @@ class PokemonService
         protected PokemonClient $client
     ) {}
 
-    public function getRandomPokemon(): PokemonDto
+    public function getRandomPokemon(): PokemonDTO
     {
         $pokemonId = rand(1, 151);
-        return PokemonDto::fromArray($this->client->getPokemonWithNameOrId($pokemonId));
+        return PokemonDTO::fromArray($this->client->getPokemonWithNameOrId($pokemonId));
     }
 
-    public function getPokemon(string $name): PokemonDto
+    public function getPokemon(string $name): PokemonDTO
     {
-        return PokemonDto::fromArray($this->client->getPokemonWithNameOrId($name));
+        return PokemonDTO::fromArray($this->client->getPokemonWithNameOrId($name));
     }
 
-    public function calculateAttack(PokemonDto $attacker, PokemonDto $defender): PokemonAttackResultDto
+    public function calculateAttack(PokemonDTO $attacker, PokemonDTO $defender): PokemonAttackResultDTO
     {
         $damage = max(1, (int)(($attacker->attack / $defender->defense) * rand(15, 30)));
         $isCritical = rand(1, 16) === 1;
@@ -32,7 +32,7 @@ class PokemonService
             $damage = (int)($damage * 1.5);
         }
 
-        return new PokemonAttackResultDto(
+        return new PokemonAttackResultDTO(
             damage: $damage,
             isCritical: $isCritical,
         );
