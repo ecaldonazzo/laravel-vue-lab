@@ -34,7 +34,7 @@
             <span class="tech-tag">REVERB</span>
             <span class="tech-tag">VUE</span>
           </div>
-          <span class="exp-status">● ativo</span>
+          <span class="exp-status pending">● em andamento</span>
         </div>
       </div>
 

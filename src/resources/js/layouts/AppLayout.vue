@@ -30,10 +30,10 @@
                     <div class="nav-label">// experimentos</div>
                     <router-link class="nav-item" to="/chat" @click="sidebarOpen = false">
                         <span class="icon">◈</span> Chat em tempo real
-                        <span class="nav-badge">NOVO</span>
                     </router-link>
                     <router-link class="nav-item" to="/pokemon" @click="sidebarOpen = false">
                         <span class="icon">⚔</span> Batalha Pokémon
+                        <span class="nav-badge">NOVO</span>
                     </router-link>
                 </div>
             </nav>
