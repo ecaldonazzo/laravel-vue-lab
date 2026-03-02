@@ -128,10 +128,12 @@ async function loadPokemons() {
     loading.value = true
     phase.value = 'idle'
     try {
-        const [r1, r2] = await Promise.all([
-            axios.get('/api/pokemon/random'),
-            axios.get('/api/pokemon/random'),
-        ])
+        const r1 = await axios.get('/api/pokemon/random')
+        let r2
+        do {
+            r2 = await axios.get('/api/pokemon/random')
+        } while (r2.data.name === r1.data.name)
+
         player.value = r1.data
         enemy.value = r2.data
         phase.value = 'vs'
@@ -139,7 +141,6 @@ async function loadPokemons() {
         loading.value = false
     }
 }
-
 async function startBattle() {
     playerHp.value = player.value.hp
     enemyHp.value = enemy.value.hp
