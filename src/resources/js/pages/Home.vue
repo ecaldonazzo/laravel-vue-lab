@@ -38,6 +38,20 @@
         </div>
       </div>
 
+        <div class="exp-card" @click="$router.push('/pokemon')">
+            <div class="exp-tag">// batalha</div>
+            <div class="exp-title">Batalha Pokémon</div>
+            <div class="exp-desc">Dois Pokémons aleatórios da Gen I se enfrentam em batalha automática. Sistema de dano com críticos e animações.</div>
+            <div class="exp-footer">
+                <div class="exp-tech">
+                    <span class="tech-tag">LARAVEL</span>
+                    <span class="tech-tag">VUE</span>
+                    <span class="tech-tag">POKEAPI</span>
+                </div>
+                <span class="exp-status">● ativo</span>
+            </div>
+        </div>
+
       <div class="exp-card disabled">
         <div class="exp-tag">// em breve</div>
         <div class="exp-title">Próximo experimento</div>
