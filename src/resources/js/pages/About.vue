@@ -119,7 +119,7 @@ import { reactive } from 'vue'
 const photos = {
     profile:          '/images/perfil.png',
     unifal:           '/images/about/inicio.png',
-    vader:            '/images/about/vader.jpg',
+    vader:            '/images/about/studiovader.png',
     'logcomex-entry': '/images/about/contratado.png',
     integracoes:      '/images/about/logesdras.jpg',
     datalake:         '/images/about/datalake.JPEG',
@@ -136,7 +136,7 @@ const timeline = [
     {
         id: 'unifal',
         year: '2018',
-        title: 'O primeiro código que mudou algo de verdade',
+        title: 'O primeiro código',
         where: 'UNIFAL-MG · Projeto Universitário',
         color: '#00d4aa',
         story: 'Meu primeiro trabalho foi uma intranet educacional desenvolvida para o Programa de Pós-Graduação em História Ibérica da UNIFAL-MG. O sistema apresentava a pesquisa sobre Cristóvão Colombo em formato de notícias interativas, com atividades de fixação — e rodava completamente offline dentro da universidade.',
@@ -146,7 +146,7 @@ const timeline = [
     {
         id: 'vader',
         year: '2019',
-        title: 'Gerenciando criatividade com código',
+        title: 'Gerenciando música com código',
         where: 'Studio Vader · Projeto Freelance',
         color: '#a89cff',
         story: 'Desenvolvi um sistema de gestão para estúdio de música onde o produtor organizava projetos, definia faixas e comunicava aos músicos o que e quando gravar. Cada músico sabia exatamente sua hora de entrar no estúdio e quais músicas gravar — tudo centralizado no sistema.',
@@ -156,7 +156,7 @@ const timeline = [
     {
         id: 'logcomex-entry',
         year: 'out. 2019',
-        title: 'Contratado. Hora de refazer tudo.',
+        title: 'Contratado. Hora de enfrentar desafios.',
         where: 'Logcomex · Engenheiro de Software Junior',
         color: '#00ff88',
         story: 'Entrei na Logcomex para refatorar do zero o Configurador de Planos — frontend e backend. Reescrevi a arquitetura frontend com Vue.js e o backend com estrutura mais robusta e segura, preparando o sistema para suportar o crescimento acelerado da empresa.',
@@ -166,7 +166,7 @@ const timeline = [
     {
         id: 'integracoes',
         year: '2021',
-        title: 'Conectando os pontos que ninguém conectava',
+        title: 'Conectando os pontos que ninguém conectava;',
         where: 'Logcomex · Engenheiro de Software Pleno',
         color: '#ffb347',
         story: 'Era o momento em que a empresa precisava de métricas reais. Assumi a missão de integrar os sistemas — HubSpot, ERP Omie e a estrutura de CRM de vendas — conectando tudo à base de dados para gerar indicadores estratégicos no Looker e consolidar o processo comercial.',
