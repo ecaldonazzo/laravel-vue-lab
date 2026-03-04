@@ -162,11 +162,11 @@ import { reactive } from 'vue'
 const photos = {
     profile:          '/images/perfil.png',
     unifal:           '/images/about/inicio.png',
-    vader:            '/images/about/vader.jpg',
+    vader:            '/images/about/studiovv.jpeg',
     'logcomex-entry': '/images/about/contratado.png',
-    integracoes:      '/images/about/logesdras.jpg',
+    integracoes:      '/images/about/squad.JPEG',
     datalake:         '/images/about/datalake.JPEG',
-    x9:               '/images/about/squad.JPEG',
+    x9:               '/images/about/logesdras.jpg',
     trem:             '/images/about/trem.jpg',
     milestones:       '/images/about/coordenador.jpg',
 }
@@ -179,7 +179,7 @@ const timeline = [
     {
         id: 'unifal',
         year: '2018',
-        title: 'O primeiro código que mudou algo de verdade',
+        title: 'O primeiro código',
         where: 'UNIFAL-MG · Projeto Universitário',
         color: '#00d4aa',
         story: 'Meu primeiro projeto: uma intranet educacional offline para o Programa de Pós-Graduação em História Ibérica da UNIFAL-MG. Apresentava pesquisa sobre Cristóvão Colombo em notícias interativas com atividades de fixação.',
@@ -189,7 +189,7 @@ const timeline = [
     {
         id: 'vader',
         year: '2019',
-        title: 'Gerenciando criatividade com código',
+        title: 'Gerenciando musica com tecnologia',
         where: 'Studio Vader · Projeto Freelance',
         color: '#a89cff',
         story: 'Sistema de gestão para estúdio de música: o produtor organizava projetos, definia faixas e comunicava aos músicos o que e quando gravar — tudo centralizado em uma plataforma.',
@@ -199,7 +199,7 @@ const timeline = [
     {
         id: 'logcomex-entry',
         year: 'out. 2019',
-        title: 'Contratado. Hora de refazer tudo.',
+        title: 'Contratado. Um novo desafio.',
         where: 'Logcomex · Engenheiro de Software Junior',
         color: '#00ff88',
         story: 'Refatorei do zero o Configurador de Planos — frontend com Vue.js e backend com arquitetura mais robusta e segura, preparando o sistema para o crescimento acelerado da empresa.',
@@ -229,7 +229,7 @@ const timeline = [
     {
         id: 'x9',
         year: '2023',
-        title: 'Squad Leader e o Robô que protegia a receita',
+        title: 'Squad Leader e o Robô que protegia o financeiro',
         where: 'Logcomex · Squad Leader',
         color: '#ff6b9d',
         story: 'Assumi a liderança de um time de engenheiros e arquitetei o Robô X9 — auditoria automática que monitorava os CRMs, identificava erros e alertava os vendedores antes do faturamento.',
@@ -296,7 +296,7 @@ const projects = {
         tags: ['PHP', 'MySQL', 'HTML5', 'CSS3', 'Bootstrap', 'OOP'],
     },
     x9: {
-        image: '/images/projects/x9.png',
+        image: '/images/projects/robox.png',
         title: 'Robô X9 — Auditoria Automática de CRM',
         year: '2023 · Squad Leader',
         objective: 'Robô de monitoramento contínuo que auditava os dados do HubSpot antes de entrarem no ERP e na base de dados, alertando os vendedores diretamente no Slack e por e-mail para corrigir erros antes do faturamento.',
@@ -313,7 +313,7 @@ const projects = {
         tags: ['Laravel', 'PHP', 'HubSpot API', 'Slack API', 'Cron', 'Squad Leader'],
     },
     trem: {
-        image: '/images/projects/trem.png',
+        image: '/images/projects/trem1.jpg',
         title: 'TREM — Technology Resource Enterprise Manager',
         year: '2024',
         objective: 'Middleware enterprise que centralizava o controle de todos os sistemas internos via API, permitindo construir qualquer funcionalidade que os sistemas isolados não conseguiam — incluindo grupo econômico dinâmico, faturamento internacional e automações operacionais.',
