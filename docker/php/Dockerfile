@@ -19,17 +19,17 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
-# Copia o projeto
 COPY . .
 
-# Instala dependências PHP
 RUN composer install --no-dev --optimize-autoloader --no-interaction
-
-# Instala dependências JS e faz o build
 RUN npm install && npm run build
 
-# Permissões
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Copia config do nginx
-COPY docker/default.conf /etc/nginx/sites-available/default
+COPY docker/nginx/default.conf /etc/nginx/sites-available/default
+COPY docker/php/start.sh /usr/local/bin/start.sh
+RUN chmod +x /usr/local/bin/start.sh
+
+EXPOSE 8080
+
+CMD ["/usr/local/bin/start.sh"]

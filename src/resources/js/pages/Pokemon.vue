@@ -89,6 +89,83 @@
         </div>
 
         <div class="terminal-line">cd /lab/experimentos/pokemon <span class="cursor"></span></div>
+
+        <!-- Implementação -->
+        <div class="explanation">
+            <div class="exp-header">
+                <div class="sh-line"></div>
+                <span class="sh-label">// implementação</span>
+                <div class="sh-line"></div>
+            </div>
+
+            <div class="exp-grid">
+                <div class="exp-card">
+                    <div class="exp-icon">◈</div>
+                    <div class="exp-title">Sobre o experimento</div>
+                    <p class="exp-text">
+                        Experimento que consome a <span class="hl">PokéAPI</span> para buscar Pokémons aleatórios da
+                        Geração I e simula uma batalha automática baseada nos atributos reais de cada Pokémon —
+                        HP, Ataque, Defesa e Velocidade. O resultado é determinístico com lógica de dano e chance
+                        de acerto crítico, simulando o sistema de batalha dos jogos originais.
+                    </p>
+                </div>
+
+                <div class="exp-card">
+                    <div class="exp-icon">⬢</div>
+                    <div class="exp-title">Como foi construído</div>
+                    <p class="exp-text">
+                        O Laravel consome a <span class="hl">PokéAPI REST</span> via <span class="hl">HTTP Client</span>
+                        e expõe os endpoints <span class="hl">GET /api/pokemon/random</span> e
+                        <span class="hl">POST /api/battle/attack</span>. O frontend em Vue.js gerencia as
+                        fases da batalha via <span class="hl">state machine</span> (idle → vs → battle → end),
+                        com animações de dano, barra de HP dinâmica e log de batalha em tempo real.
+                    </p>
+                </div>
+
+                <div class="exp-card">
+                    <div class="exp-icon">⬡</div>
+                    <div class="exp-title">Stack</div>
+                    <div class="exp-tags">
+                        <span class="exp-tag">PokéAPI</span>
+                        <span class="exp-tag">Laravel HTTP Client</span>
+                        <span class="exp-tag">Vue.js 3</span>
+                        <span class="exp-tag">REST API</span>
+                        <span class="exp-tag">State Machine</span>
+                        <span class="exp-tag">Axios</span>
+                        <span class="exp-tag">Async/Await</span>
+                        <span class="exp-tag">CSS Animations</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="exp-flow">
+                <div class="flow-step">
+                    <span class="fs-label">Vue.js</span>
+                    <span class="fs-sub">Axios</span>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <span class="fs-label">GET /api</span>
+                    <span class="fs-sub">Laravel Controller</span>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <span class="fs-label">HTTP Client</span>
+                    <span class="fs-sub">Laravel</span>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <span class="fs-label">PokéAPI</span>
+                    <span class="fs-sub">REST externa</span>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step highlight">
+                    <span class="fs-label">batalha ⚡</span>
+                    <span class="fs-sub">state machine</span>
+                </div>
+            </div>
+        </div>
+
     </div>
 </template>
 
@@ -130,10 +207,7 @@ async function loadPokemons() {
     try {
         const r1 = await axios.get('/api/pokemon/random')
         let r2
-        do {
-            r2 = await axios.get('/api/pokemon/random')
-        } while (r2.data.name === r1.data.name)
-
+        do { r2 = await axios.get('/api/pokemon/random') } while (r2.data.name === r1.data.name)
         player.value = r1.data
         enemy.value = r2.data
         phase.value = 'vs'
@@ -141,6 +215,7 @@ async function loadPokemons() {
         loading.value = false
     }
 }
+
 async function startBattle() {
     playerHp.value = player.value.hp
     enemyHp.value = enemy.value.hp
@@ -148,14 +223,11 @@ async function startBattle() {
     enemyFainted.value = false
     battleLog.value = []
     phase.value = 'battle'
-
     addLog(`${player.value.name} vs ${enemy.value.name} — que vença o melhor!`, 'event')
     await sleep(600)
-
     const playerFirst = player.value.speed >= enemy.value.speed
     addLog(`${playerFirst ? player.value.name : enemy.value.name} é mais rápido e ataca primeiro!`, 'event')
     await sleep(500)
-
     while (playerHp.value > 0 && enemyHp.value > 0) {
         if (playerFirst) {
             await attackTurn('player')
@@ -170,7 +242,6 @@ async function startBattle() {
         }
         await sleep(300)
     }
-
     await sleep(500)
     winner.value = playerHp.value > 0 ? player.value : enemy.value
     phase.value = 'end'
@@ -180,20 +251,15 @@ async function attackTurn(attacker) {
     const atk = attacker === 'player' ? player.value : enemy.value
     const defHp = attacker === 'player' ? enemyHp : playerHp
     const defPokemon = attacker === 'player' ? enemy.value : player.value
-
     try {
         const { data } = await axios.post('/api/battle/attack', {
             attacker: atk.name,
             defender: defPokemon.name,
         })
-
         defHp.value = Math.max(0, defHp.value - data.damage)
-
         if (attacker === 'player') { enemyShaking.value = true; setTimeout(() => enemyShaking.value = false, 500) }
         else { playerShaking.value = true; setTimeout(() => playerShaking.value = false, 500) }
-
         addLog(`${atk.name} atacou! ${data.isCritical ? '⭐ CRÍTICO! ' : ''}-${data.damage} HP`, attacker)
-
         if (defHp.value <= 0) {
             if (attacker === 'player') enemyFainted.value = true
             else playerFainted.value = true
@@ -202,7 +268,42 @@ async function attackTurn(attacker) {
     } catch (e) {
         addLog('Erro no ataque!', 'event')
     }
-
     await sleep(600)
 }
 </script>
+
+<style scoped>
+/* Explanation — igual ao Chat */
+.explanation { margin-top: 48px; }
+
+.exp-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+.sh-line { flex: 1; height: 1px; background: var(--border); }
+.sh-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
+
+.exp-grid { display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px; }
+
+.exp-card {
+    background: var(--sidebar);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 22px 32px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.15s;
+}
+.exp-card:hover { border-color: rgba(0,255,136,0.2); }
+.exp-icon { font-size: 18px; color: var(--accent); opacity: 0.6; margin-bottom: 10px; }
+.exp-title { font-size: 15px; font-weight: 700; color: var(--text-bright); margin-bottom: 10px; letter-spacing: -0.3px; }
+.exp-text { font-size: 12px; line-height: 1.8; color: var(--text); }
+.hl { color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 10.5px; }
+.exp-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.exp-tag { background: rgba(0,255,136,0.06); border: 1px solid rgba(0,255,136,0.15); color: var(--accent); font-size: 9px; padding: 3px 8px; border-radius: 3px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.5px; }
+
+.exp-flow { display: flex; align-items: center; justify-content: space-between; gap: 8px; background: var(--sidebar); border: 1px solid var(--border); border-radius: 8px; padding: 20px 32px; overflow-x: auto; }
+.flow-step { display: flex; flex-direction: column; align-items: center; gap: 4px; flex-shrink: 0; }
+.fs-label { font-size: 12px; font-weight: 700; color: var(--text-bright); font-family: 'JetBrains Mono', monospace; }
+.fs-sub { font-size: 9px; color: var(--text-dim); letter-spacing: 0.3px; text-align: center; }
+.flow-step.highlight .fs-label { color: var(--accent); }
+.flow-step.highlight .fs-sub { color: var(--accent); opacity: 0.7; }
+.flow-arrow { color: var(--text-dim); font-size: 16px; flex-shrink: 0; padding-bottom: 14px; }
+</style>

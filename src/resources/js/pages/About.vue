@@ -148,6 +148,8 @@
             </div>
         </Teleport>
 
+        <div class="terminal-line">cd /lab/about <span class="cursor"></span></div>
+
     </div>
 </template>
 
@@ -160,7 +162,7 @@ import { reactive } from 'vue'
 const photos = {
     profile:          '/images/perfil.png',
     unifal:           '/images/about/inicio.png',
-    vader:            '/images/about/studiovv.jpeg',
+    vader:            '/images/about/vader.jpg',
     'logcomex-entry': '/images/about/contratado.png',
     integracoes:      '/images/about/logesdras.jpg',
     datalake:         '/images/about/datalake.JPEG',
@@ -294,7 +296,7 @@ const projects = {
         tags: ['PHP', 'MySQL', 'HTML5', 'CSS3', 'Bootstrap', 'OOP'],
     },
     x9: {
-        image: '/images/projects/robox.png',
+        image: '/images/projects/x9.png',
         title: 'Robô X9 — Auditoria Automática de CRM',
         year: '2023 · Squad Leader',
         objective: 'Robô de monitoramento contínuo que auditava os dados do HubSpot antes de entrarem no ERP e na base de dados, alertando os vendedores diretamente no Slack e por e-mail para corrigir erros antes do faturamento.',
@@ -616,5 +618,28 @@ function closeModal() {
     .profile-stats { justify-content: center; }
     .modal-layout { grid-template-columns: 1fr; }
     .modal-image-side { position: static; }
+}
+
+.terminal-line {
+    margin-top: 48px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    letter-spacing: 0.5px;
+}
+
+.cursor {
+    display: inline-block;
+    width: 8px;
+    height: 13px;
+    background: var(--accent);
+    vertical-align: middle;
+    margin-left: 2px;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
 }
 </style>

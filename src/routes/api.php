@@ -18,3 +18,4 @@ Route::prefix('pokemon')->group(function () {
 });
 
 Route::post('/battle/attack', [PokemonController::class, 'attack']);
+Route::post('/chat/send', [App\Http\Controllers\ChatController::class, 'send']);
