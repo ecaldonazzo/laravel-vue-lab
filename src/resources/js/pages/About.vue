@@ -86,22 +86,63 @@
             <div class="modal-overlay" :class="{ open: modal.open }" @click.self="closeModal">
                 <div class="modal-box" v-if="modal.open">
                     <button class="modal-close" @click="closeModal">✕</button>
-                    <div class="modal-label">// projeto</div>
-                    <h2 class="modal-title">{{ modal.data.title }}</h2>
-                    <div class="modal-year">{{ modal.data.year }}</div>
-                    <div class="modal-divider"></div>
-                    <div class="modal-section">
-                        <div class="msl">sobre o projeto</div>
-                        <p class="modal-text">{{ modal.data.about }}</p>
+
+                    <!-- Layout lado a lado: só UNIFAL -->
+                    <div v-if="modal.data.sideImage" class="modal-layout">
+                        <div class="modal-image-side">
+                            <img :src="modal.data.image" :alt="modal.data.title" @error="e => e.target.parentElement.style.display='none'" />
+                        </div>
+                        <div class="modal-text-side">
+                            <div class="modal-label">// projeto</div>
+                            <h2 class="modal-title">{{ modal.data.title }}</h2>
+                            <div class="modal-year">{{ modal.data.year }}</div>
+                            <div class="modal-divider"></div>
+                            <div class="modal-section">
+                                <div class="msl">// descrição</div>
+                                <p class="modal-text">{{ modal.data.objective }}</p>
+                            </div>
+                            <div class="modal-section modal-gains">
+                                <div class="msl">// ganhos</div>
+                                <p class="modal-text">{{ modal.data.gains }}</p>
+                            </div>
+                            <div class="modal-section contrib">
+                                <div class="msl">// minhas contribuições</div>
+                                <ul class="modal-list">
+                                    <li v-for="c in modal.data.contributions" :key="c">{{ c }}</li>
+                                </ul>
+                            </div>
+                            <div class="modal-tags">
+                                <span class="tag" v-for="t in modal.data.tags" :key="t">{{ t }}</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-section contrib">
-                        <div class="msl">// minha contribuição</div>
-                        <ul class="modal-list">
-                            <li v-for="c in modal.data.contributions" :key="c">{{ c }}</li>
-                        </ul>
-                    </div>
-                    <div class="modal-tags">
-                        <span class="tag" v-for="t in modal.data.tags" :key="t">{{ t }}</span>
+
+                    <!-- Layout padrão: foto em cima -->
+                    <div v-else>
+                        <div class="modal-project-image" v-if="modal.data.image">
+                            <img :src="modal.data.image" :alt="modal.data.title" @error="e => e.target.parentElement.style.display='none'" />
+                        </div>
+                        <div class="modal-label">// projeto</div>
+                        <h2 class="modal-title">{{ modal.data.title }}</h2>
+                        <div class="modal-year">{{ modal.data.year }}</div>
+                        <div class="modal-divider"></div>
+                        <div class="modal-section">
+                            <div class="msl">// descrição</div>
+                            <p class="modal-text">{{ modal.data.objective }}</p>
+                        </div>
+                        <div class="modal-section modal-gains">
+                            <div class="msl">// ganhos</div>
+                            <p class="modal-text">{{ modal.data.gains }}</p>
+                        </div>
+                        <div class="modal-section contrib">
+                            <div class="msl">// minhas contribuições</div>
+                            <ul class="modal-list">
+                                <li v-for="c in modal.data.contributions" :key="c">{{ c }}</li>
+                            </ul>
+                        </div>
+                        <div class="modal-tags">
+                            <span class="tag" v-for="t in modal.data.tags" :key="t">{{ t }}</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -136,30 +177,30 @@ const timeline = [
     {
         id: 'unifal',
         year: '2018',
-        title: 'O primeiro código',
+        title: 'O primeiro código que mudou algo de verdade',
         where: 'UNIFAL-MG · Projeto Universitário',
         color: '#00d4aa',
-        story: 'Meu primeiro trabalho foi uma intranet educacional desenvolvida para o Programa de Pós-Graduação em História Ibérica da UNIFAL-MG. O sistema apresentava a pesquisa sobre Cristóvão Colombo em formato de notícias interativas, com atividades de fixação — e rodava completamente offline dentro da universidade.',
+        story: 'Meu primeiro projeto: uma intranet educacional offline para o Programa de Pós-Graduação em História Ibérica da UNIFAL-MG. Apresentava pesquisa sobre Cristóvão Colombo em notícias interativas com atividades de fixação.',
         tags: ['HTML', 'CSS3', 'JavaScript', 'Bootstrap', 'offline-first'],
         project: true,
     },
     {
         id: 'vader',
         year: '2019',
-        title: 'Gerenciando música com código',
+        title: 'Gerenciando criatividade com código',
         where: 'Studio Vader · Projeto Freelance',
         color: '#a89cff',
-        story: 'Desenvolvi um sistema de gestão para estúdio de música onde o produtor organizava projetos, definia faixas e comunicava aos músicos o que e quando gravar. Cada músico sabia exatamente sua hora de entrar no estúdio e quais músicas gravar — tudo centralizado no sistema.',
+        story: 'Sistema de gestão para estúdio de música: o produtor organizava projetos, definia faixas e comunicava aos músicos o que e quando gravar — tudo centralizado em uma plataforma.',
         tags: ['gestão de projetos', 'agenda', 'músicos', 'gravações'],
         project: true,
     },
     {
         id: 'logcomex-entry',
         year: 'out. 2019',
-        title: 'Contratado. Hora de enfrentar desafios',
+        title: 'Contratado. Hora de refazer tudo.',
         where: 'Logcomex · Engenheiro de Software Junior',
         color: '#00ff88',
-        story: 'Entrei na Logcomex para refatorar do zero o Configurador de Planos — frontend e backend. Reescrevi a arquitetura frontend com Vue.js e o backend com estrutura mais robusta e segura, preparando o sistema para suportar o crescimento acelerado da empresa.',
+        story: 'Refatorei do zero o Configurador de Planos — frontend com Vue.js e backend com arquitetura mais robusta e segura, preparando o sistema para o crescimento acelerado da empresa.',
         tags: ['Vue.js', 'refatoração', 'frontend', 'escala'],
         project: false,
     },
@@ -169,7 +210,7 @@ const timeline = [
         title: 'Conectando os pontos que ninguém conectava',
         where: 'Logcomex · Engenheiro de Software Pleno',
         color: '#ffb347',
-        story: 'Era o momento em que a empresa precisava de métricas reais. Assumi a missão de integrar os sistemas — HubSpot, ERP Omie e a estrutura de CRM de vendas — conectando tudo à base de dados para gerar indicadores estratégicos no Looker e consolidar o processo comercial.',
+        story: 'Integrei os sistemas da empresa — HubSpot, ERP Omie e CRM de vendas — gerando indicadores estratégicos no Looker e consolidando o processo comercial.',
         tags: ['Movidesk', 'HubSpot', 'Looker', 'APIs', 'ETL', 'métricas'],
         project: false,
     },
@@ -179,7 +220,7 @@ const timeline = [
         title: 'Arquitetando a fonte única da verdade',
         where: 'Logcomex · Engenheiro de Software Senior',
         color: '#ff6b9d',
-        story: 'Arquitetei os robôs que capturavam dados de todos os sistemas da empresa. Danilo Damasceno (BI) criava os dashboards no Looker enquanto me ajudava a estruturar a base — juntos entregamos o Health Score, o painel de Growth e os indicadores estratégicos que passaram a guiar as decisões da empresa.',
+        story: 'Construí os robôs que capturavam dados de todos os sistemas da empresa — HubSpot, ERP Omie e mais — centralizando tudo no Data Lake como fonte única da verdade para os indicadores estratégicos.',
         tags: ['Data Lake', 'ERP Omie', 'Python', 'crons', 'Health Score', 'Growth'],
         project: false,
     },
@@ -189,7 +230,7 @@ const timeline = [
         title: 'Squad Leader e o Robô que protegia a receita',
         where: 'Logcomex · Squad Leader',
         color: '#ff6b9d',
-        story: 'Passei a liderar um time de engenheiros de software e arquitetei o Robô X9 — sistema de auditoria automática que monitorava os CRMs, identificava erros de lançamento e alertava os vendedores antes do faturamento. O resultado foi uma base de dados confiável e fechamentos mensais muito mais ágeis.',
+        story: 'Assumi a liderança de um time de engenheiros e arquitetei o Robô X9 — auditoria automática que monitorava os CRMs, identificava erros e alertava os vendedores antes do faturamento.',
         tags: ['Squad Leader', 'auditoria', 'CRM', 'automação', 'alertas', 'faturamento', 'robô'],
         project: true,
     },
@@ -199,7 +240,7 @@ const timeline = [
         title: 'TREM — a plataforma que transformou a operação',
         where: 'Logcomex · Coordenador de Integrações',
         color: '#00ff88',
-        story: 'Com a liderança mais madura e atuação multi-área, construí o TREM — middleware que criei do zero enquanto continuava programando. O sistema criava interfaces onde não existiam, automatizava operações e integrava ferramentas sem API, viabilizando faturamento internacional, transferências de contrato em segundos e fechamentos contábeis acelerados.',
+        story: 'Liderei, idealizei e desenvolvi junto ao time de engenheiros a Plataforma TREM — middleware que potencializou o ERP da empresa e possibilitou fazer aquilo que os outros sistemas não conseguiam, unindo liderança e código do início ao fim.',
         tags: ['middleware', 'Vue.js', 'Laravel', 'automação', 'enterprise', 'integrações'],
         project: true,
     },
@@ -209,7 +250,7 @@ const timeline = [
         title: 'Mais de 150 iniciativas concluídas',
         where: 'Logcomex · Coordenador de Integrações de Sistemas',
         color: '#00d4aa',
-        story: 'Ao final de 2025, olhei para trás e contei: mais de 150 iniciativas entregues. Cada uma delas foi uma solução real — um processo automatizado, um sistema integrado, uma operação que deixou de depender de trabalho manual. Não é um número numa planilha. É a soma de seis anos construindo coisas que importam.',
+        story: 'Mais de 150 iniciativas entregues — processos automatizados, sistemas integrados, operações que deixaram de depender de trabalho manual. Não é um número numa planilha. É a soma de seis anos construindo coisas que importam.',
         tags: ['150+ iniciativas', 'integrações', 'automações', 'engenharia', 'entrega'],
         project: false,
     },
@@ -218,59 +259,74 @@ const timeline = [
 // ── Modal data ───────────────────────────────────────
 const projects = {
     unifal: {
+        image: '/images/projects/castela3.jpg',
+        sideImage: true,
         title: 'Intranet Educacional — UNIFAL-MG',
         year: '2018',
-        about: 'Objeto de Aprendizagem desenvolvido para o Programa de Pós-Graduação em História Ibérica da UNIFAL-MG, baseado na dissertação "Cristóvão Colombo Descoberto" do mestrando Mário Caldonazzo de Castro. O sistema rodava offline dentro da universidade e apresentava o conteúdo histórico em formato de notícias interativas, com trechos da dissertação e atividades de fixação. Contou com apoio da CAPES e FAPEMIG.',
+        objective: 'Objeto de Aprendizagem idealizado pelo mestrando Mário Caldonazzo de Castro para o Programa de Pós-Graduação em História Ibérica da UNIFAL-MG, baseado na dissertação "Cristóvão Colombo Descoberto". O sistema apresentava informações sobre Colombo e a Descoberta da América em notícias sucintas, com trechos da dissertação e atividades interativas de fixação — rodando completamente offline. Apoiado pela CAPES e FAPEMIG.',
+        challenge: 'Criar algo simples de instalar em qualquer computador e compartilhar em rede, já que seria reproduzido para crianças em escolas públicas — e meu conhecimento ainda era limitado, estava iniciando os estudos.',
+        gains: 'O projeto foi apresentado no mestrado com grande repercussão e a UNIFAL o aplicou em escolas públicas da região — levando o ensino de história de forma interativa e acessível às crianças.',
+        architecture: 'Arquitetura monolítica 100% frontend — sem servidor, sem backend. Apenas HTML5, CSS3, JavaScript puro e Bootstrap, rodando offline diretamente no navegador.',
         contributions: [
             'Desenvolvi toda a interface e navegação do sistema offline do zero',
-            'Criei as atividades interativas de fixação de conteúdo',
-            'Estruturei o conteúdo histórico em formato de notícias digitais',
-            'Implementei lógica de navegação entre módulos do objeto de aprendizagem',
-            'Garanti compatibilidade offline-first sem dependência de servidor externo',
+            'Estruturei o conteúdo histórico em formato de notícias digitais interativas',
+            'Criei as atividades de fixação de conteúdo com JavaScript puro',
+            'Garanti compatibilidade offline-first para redes escolares públicas',
+            'Implementei instalação simples sem dependência de servidor externo',
         ],
-        tags: ['HTML', 'CSS3', 'JavaScript', 'Bootstrap', 'offline-first', 'educação'],
-    },
-    x9: {
-        title: 'Robô X9 — Auditoria Automática de CRM',
-        year: '2023 · Squad Leader',
-        about: 'Sistema de auditoria automática para proteger a integridade da base de dados. O Robô X9 monitorava os dados dos CRMs, identificava erros antes do faturamento e alertava os vendedores com tempo para correção. Eliminou erros silenciosos que antes só apareciam no fechamento mensal.',
-        contributions: [
-            'Concepção e desenvolvimento completo como Squad Leader',
-            'Análise das regras de negócio para identificar padrões de erro',
-            'Sistema de alertas automáticos para vendedores antes do faturamento',
-            'Integração com os CRMs para leitura e validação contínua dos dados',
-            'Redução drástica de erros no fechamento mensal',
-            'Proteção da receita evitando dados incorretos na base de faturamento',
-        ],
-        tags: ['auditoria', 'CRM', 'robô', 'alertas', 'Python', 'faturamento', 'Squad Leader'],
+        tags: ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap', 'offline-first'],
     },
     vader: {
+        image: '/images/projects/vader.png',
         title: 'Sistema de Gestão — Studio Vader',
         year: '2019',
-        about: 'Plataforma de gestão desenvolvida para um estúdio de música, cobrindo o ciclo completo de produção: controle de sessões de gravação, agenda de músicos participantes por projeto, acompanhamento de status das produções e gestão de projetos musicais.',
+        objective: 'Gerenciador de projetos musicais onde músicos chegavam ao estúdio já sabendo o roteiro completo de gravação — faixas, demos para ouvir e preparação de instrumentos — enquanto o produtor trabalhava na cabine com outros músicos.',
+        challenge: 'Criar uma solução responsiva e testável num ambiente complexo, onde os usuários reais (músicos e produtores) tinham rotinas dinâmicas e difícil disponibilidade para testes.',
+        gains: 'Maior agilidade para direcionar músicos na gravação, menor tempo para organizar roteiros, redução de ruídos de comunicação dentro do estúdio, repositório centralizado de álbuns e contatos de músicos freelancers.',
+        architecture: 'Arquitetura monolítica com backend em PHP orientado a objetos (responsabilidades separadas por classe), frontend em HTML5, CSS3 e Bootstrap, banco de dados MySQL.',
         contributions: [
-            'Desenvolvimento fullstack completo do sistema do zero',
+            'Desenvolvimento fullstack completo do zero',
             'Modelagem do banco de dados para projetos musicais',
-            'Interface de gestão de agenda e escalação de músicos',
-            'Sistema de acompanhamento de gravações por projeto',
+            'Interface de roteiro e agenda para músicos e produtores',
+            'Repositório de faixas demo e álbuns de gravações',
+            'Cadastro e gestão de contatos de músicos freelancers',
         ],
-        tags: ['gestão', 'agenda', 'estúdio', 'músicos', 'projetos'],
+        tags: ['PHP', 'MySQL', 'HTML5', 'CSS3', 'Bootstrap', 'OOP'],
+    },
+    x9: {
+        image: '/images/projects/robox.png',
+        title: 'Robô X9 — Auditoria Automática de CRM',
+        year: '2023 · Squad Leader',
+        objective: 'Robô de monitoramento contínuo que auditava os dados do HubSpot antes de entrarem no ERP e na base de dados, alertando os vendedores diretamente no Slack e por e-mail para corrigir erros antes do faturamento.',
+        challenge: 'No fechamento mensal, contratos chegavam ao ERP com informações incompletas ou incorretas vindas do HubSpot, sobrecarregando o financeiro com retrabalho e comprometendo as métricas da empresa.',
+        gains: 'Redução do fechamento mensal de mais de 2 dias para 2 horas. Assertividade nas métricas, governança de dados e redução significativa da sobrecarga operacional do time financeiro.',
+        architecture: 'Cron periódico em Laravel que consultava o HubSpot via API, validava regras de negócio, barrava registros inconsistentes e disparava alertas via Slack API e e-mail. Arquitetura em camadas: Service, Repository e Integration.',
+        contributions: [
+            'Idealização e desenvolvimento completo do robô como Squad Leader',
+            'Mapeamento das regras de negócio para identificar padrões de erro',
+            'Integração com HubSpot API para leitura e validação contínua',
+            'Sistema de alertas automáticos via Slack e e-mail por vendedor',
+            'Bloqueio de registros incorretos antes de entrar no ERP e na base',
+        ],
+        tags: ['Laravel', 'PHP', 'HubSpot API', 'Slack API', 'Cron', 'Squad Leader'],
     },
     trem: {
+        image: '/images/projects/trem.png',
         title: 'TREM — Technology Resource Enterprise Manager',
-        year: '2023',
-        about: 'Middleware enterprise criado do zero para resolver um problema crítico da Logcomex: integrar sistemas que não possuíam API nativa, criar interfaces customizadas onde os sistemas legados não ofereciam e automatizar tarefas operacionais de alto volume. Tornou-se o núcleo das operações da empresa.',
+        year: '2024',
+        objective: 'Middleware enterprise que centralizava o controle de todos os sistemas internos via API, permitindo construir qualquer funcionalidade que os sistemas isolados não conseguiam — incluindo grupo econômico dinâmico, faturamento internacional e automações operacionais.',
+        challenge: 'A empresa tinha produtos distintos e clientes com estruturas complexas (grupos, parentes com CNPJs diferentes rateando contratos). Os sistemas internos não supriam essas necessidades e não havia uma camada de integração unificada.',
+        gains: 'Redução significativa do trabalho operacional, faturamento internacional construído do zero, métricas 100% assertivas e ajustadas automaticamente, suspensão e transferência de contratos em local único, redução de um dos maiores custos operacionais da empresa.',
+        architecture: 'Middleware com backend Laravel separado do frontend Vue.js. Autenticação Google com 2 fatores. Camadas: Controller, Service, DTO, Repository e Integration. Frontend com Vuex para gerenciamento de estado.',
         contributions: [
-            'Arquitetura e desenvolvimento completo da plataforma como Coordenador de Integrações',
-            'Habilitou o faturamento internacional da empresa',
-            'Transferência de contratos entre sistemas em segundos',
-            'Grupo econômico dinâmico — totalmente gerenciável em uma interface',
-            'Suspensão de contratos em todos os sistemas via interface única',
+            'Idealização, liderança e desenvolvimento da plataforma do zero',
+            'Arquitetura do middleware com separação total de responsabilidades',
+            'Construção do módulo de grupo econômico dinâmico',
+            'Integração de sistemas via API e arquivos exportados sem API',
+            'Implementação do faturamento internacional',
             'Automações que eliminaram trabalho operacional repetitivo',
-            'Integração de sistemas que só exportavam arquivos sem API',
-            'Conciliações financeiras e aceleração de fechamentos mensais',
         ],
-        tags: ['middleware', 'Vue.js', 'Laravel', 'automação', 'enterprise', "faturamento int'l"],
+        tags: ['Laravel', 'Vue.js', 'Vuex', 'Google Auth', '2FA', 'REST API', 'DTO', 'middleware'],
     },
 }
 
@@ -469,8 +525,27 @@ function closeModal() {
 .modal-box {
     background: var(--sidebar); border: 1px solid var(--border);
     border-radius: 8px; padding: 28px;
-    max-width: 620px; width: 100%; max-height: 80vh;
+    max-width: 960px; width: 100%; max-height: 90vh;
     overflow-y: auto; position: relative;
+}
+.modal-layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 28px;
+    align-items: start;
+}
+.modal-image-side {
+    position: sticky;
+    top: 0;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--bg);
+}
+.modal-image-side img {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 .modal-box::before {
     content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
@@ -485,6 +560,39 @@ function closeModal() {
 }
 .modal-close:hover { background: rgba(255,100,100,0.15); color: #ff6b6b; }
 
+
+.modal-project-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+}
+.modal-project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.modal-challenge { background: rgba(255,107,107,0.03); border: 1px solid rgba(255,107,107,0.1); border-radius: 6px; padding: 14px; }
+.modal-challenge .msl { color: #ff6b6b; }
+.modal-gains { background: rgba(0,212,170,0.03); border: 1px solid rgba(0,212,170,0.1); border-radius: 6px; padding: 14px; }
+.modal-gains .msl { color: #00d4aa; }
+.modal-arch { background: rgba(168,156,255,0.03); border: 1px solid rgba(168,156,255,0.1); border-radius: 6px; padding: 14px; }
+.modal-arch .msl { color: #a89cff; }
+.modal-arch-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.arch-tag {
+    background: rgba(168,156,255,0.08);
+    border: 1px solid rgba(168,156,255,0.2);
+    color: #a89cff;
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.5px;
+}
 .modal-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim); margin-bottom: 6px; }
 .modal-title { font-size: 20px; font-weight: 700; color: var(--text-bright); letter-spacing: -0.5px; margin-bottom: 4px; }
 .modal-year { font-size: 11px; color: var(--accent); }
@@ -506,5 +614,7 @@ function closeModal() {
     .story-item .story-content, .story-item.reverse .story-content { order: 1; }
     .profile-intro { flex-direction: column; text-align: center; }
     .profile-stats { justify-content: center; }
+    .modal-layout { grid-template-columns: 1fr; }
+    .modal-image-side { position: static; }
 }
 </style>
