@@ -119,7 +119,7 @@ import { reactive } from 'vue'
 const photos = {
     profile:          '/images/perfil.png',
     unifal:           '/images/about/inicio.png',
-    vader:            '/images/about/studiovader.png',
+    vader:            '/images/about/studiovv.jpeg',
     'logcomex-entry': '/images/about/contratado.png',
     integracoes:      '/images/about/logesdras.jpg',
     datalake:         '/images/about/datalake.JPEG',
@@ -156,7 +156,7 @@ const timeline = [
     {
         id: 'logcomex-entry',
         year: 'out. 2019',
-        title: 'Contratado. Hora de enfrentar desafios.',
+        title: 'Contratado. Hora de enfrentar desafios',
         where: 'Logcomex · Engenheiro de Software Junior',
         color: '#00ff88',
         story: 'Entrei na Logcomex para refatorar do zero o Configurador de Planos — frontend e backend. Reescrevi a arquitetura frontend com Vue.js e o backend com estrutura mais robusta e segura, preparando o sistema para suportar o crescimento acelerado da empresa.',
@@ -166,7 +166,7 @@ const timeline = [
     {
         id: 'integracoes',
         year: '2021',
-        title: 'Conectando os pontos que ninguém conectava;',
+        title: 'Conectando os pontos que ninguém conectava',
         where: 'Logcomex · Engenheiro de Software Pleno',
         color: '#ffb347',
         story: 'Era o momento em que a empresa precisava de métricas reais. Assumi a missão de integrar os sistemas — HubSpot, ERP Omie e a estrutura de CRM de vendas — conectando tudo à base de dados para gerar indicadores estratégicos no Looker e consolidar o processo comercial.',
