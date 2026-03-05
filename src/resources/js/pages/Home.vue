@@ -8,8 +8,8 @@
       </div>
       <div class="profile-info">
         <div class="hero-tag">// olá, eu sou</div>
-        <h1>Esdras<span>_</span></h1>
-        <p>Desenvolvedor Full Stack apaixonado por arquiteturas de software, soluções criativas e código que funciona de verdade. Aqui você encontra meus projetos interativos — não só teoria, mas coisas que você pode testar.</p>
+          <h1>Esdras<span>_</span></h1>
+          <p>Engenheiro de Software Full Stack & Arquiteto de Sistemas com mais de 9 anos construindo coisas que funcionam de verdade — de integrações e middlewares enterprise a automações que eliminam trabalho manual. Aqui não só teoria, mas experimentos que você pode testar.</p>
         <router-link to="/sobre" class="btn-link">Ver minha trajetória →</router-link>
       </div>
     </div>
